@@ -14,7 +14,6 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         try {
-            // Read input
             List<Graph> graphs = JsonReader.readGraphs("assignment_3_input.json");
             List<JsonWriter.Result> results = new ArrayList<>();
 
@@ -22,13 +21,10 @@ public class Main {
             KruskalAlgorithm kruskal = new KruskalAlgorithm();
 
             for (Graph graph : graphs) {
-                // Run Prim
                 PrimAlgorithm.MSTResult primResult = prim.findMST(graph);
 
-                // Run Kruskal
                 KruskalAlgorithm.MSTResult kruskalResult = kruskal.findMST(graph);
 
-                // Collect results
                 JsonWriter.InputStats stats = new JsonWriter.InputStats(
                         graph.getNodes().size(), graph.getEdges().size());
                 JsonWriter.Result result = new JsonWriter.Result(
@@ -44,11 +40,9 @@ public class Main {
                 results.add(result);
             }
 
-            // Write output
             JsonWriter.writeResults("assignment_3_output.json", results);
             System.out.println("Processing complete. Output written to assignment_3_output.json");
 
-            // Generate CSV for analysis
             generateCSV(results);
 
         } catch (IOException e) {
