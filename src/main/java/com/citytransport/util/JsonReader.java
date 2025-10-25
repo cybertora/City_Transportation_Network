@@ -2,6 +2,7 @@ package com.citytransport.util;
 
 import com.citytransport.model.Graph;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.FileReader;
@@ -13,9 +14,5 @@ public class JsonReader {
         Gson gson = new Gson();
         JsonObject json = gson.fromJson(new FileReader(filePath), JsonObject.class);
         return gson.fromJson(json.get("graphs"), new TypeToken<List<Graph>>(){}.getType());
-    }
-
-    private static class JsonObject {
-        List<Graph> graphs;
     }
 }
